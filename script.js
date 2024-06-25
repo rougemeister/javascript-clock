@@ -7,6 +7,10 @@ const changeFormat = document.getElementById('change-format')
 const alarmEl = document.getElementById('alarm')
 let hour12 = false;
 
+
+
+timeFormat.style.visibility = 'hidden'
+
 function Clock() {
     this.hours = 0;
     this.minutes = 0;
@@ -85,6 +89,7 @@ changeFormat.addEventListener('change', (e)=>{
       timeFormat.style.visibility = "hidden"
       hour12 = false
     } else if(e.target.value === "12Hour"){
+      timeFormat.style.visibility = "visible"
             hour12 = true
     }
 })
