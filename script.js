@@ -71,3 +71,24 @@ Object.defineProperties(Clock.prototype, {
 
 
 
+
+function updateTime(func){
+    setInterval(() => {
+        const date = new Date();
+        const myhours = date.getHours();
+        const myminutes = date.getMinutes();
+        const myseconds = date.getSeconds();
+        func(myhours, myminutes, myseconds);     
+    }, 1000);
+}
+
+
+
+
+const newClock = new Clock();
+
+
+//updating time on seconds
+updateTime((hours, minutes, seconds) => {
+    newClock.update(hours, minutes, seconds);
+}); 
