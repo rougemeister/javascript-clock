@@ -4,7 +4,8 @@ const clockminutes = document.querySelector('.minutes');
 const clockseconds = document.querySelector('.seconds');
 const timeFormat = document.querySelector('.time-format');
 const changeFormat = document.getElementById('change-format')
-
+const alarmEl = document.getElementById('alarm')
+let hour12 = false;
 
 function Clock() {
     this.hours = 0;
@@ -58,10 +59,18 @@ Object.defineProperties(Clock.prototype, {
     },
     display: {
         value: function() {
+          if(hour12){
+            clockhours.textContent = (this.hours - 12).toString().padStart(2, '0');
+            clockminutes.textContent = this.minutes.toString().padStart(2, '0');
+            clockseconds.textContent = this.seconds.toString().padStart(2, '0');
+            timeFormat.textContent = this.get12HourTime();
+          } else{
             clockhours.textContent = this.hours.toString().padStart(2, '0');
             clockminutes.textContent = this.minutes.toString().padStart(2, '0');
             clockseconds.textContent = this.seconds.toString().padStart(2, '0');
             timeFormat.textContent = this.get12HourTime();
+          }
+            
         }
     }
 })
@@ -70,7 +79,14 @@ Object.defineProperties(Clock.prototype, {
 console.log(changeFormat)
 
 
-
+changeFormat.addEventListener('change', (e)=>{
+  console.log(e)
+    if(e.target.value === "24Hour" ){
+      timeFormat.style.visibility = "hidden"
+    } else if(e.target.value === "12Hour"){
+            hour12 = true
+    }
+})
 
 
 function updateTime(func){
@@ -93,5 +109,69 @@ const newClock = new Clock();
 updateTime((hours, minutes, seconds) => {
     newClock.update(hours, minutes, seconds);
 }); 
+
+
+
+let alarmTime = null;
+let is24HourFormat = true;
+
+const setAlarm = () => {
+  
+  const format = document.getElementById("format").value;
+  let period = null;
+
+  if (format === "12") {
+    period = document.querySelector('input[name="period"]:checked').value;
+  }
+
+  if (isNaN(alarmHour) || isNaN(alarmMinute) || (format === "12" && !period)) {
+    alert("Please enter valid hour, minute, and period for the alarm.");
+    return;
+  }
+
+  alarmTime = { hours: alarmHour, minutes: alarmMinute, period };
+  is24HourFormat = format === "24";
+
+  alert(
+    `Alarm set for ${alarmHour.toString().padStart(2, "0")}:${alarmMinute
+      .toString()
+      .padStart(2, "0")}${period ? ` ${period}` : ""}`
+  );
+};
+
+const stopAlarm = () => {
+  if (alarmSound) {
+    alarmSound.pause();
+    alarmSound.currentTime = 0;
+  }
+};
+
+const checkAlarm = (currentClock) => {
+  if (!alarmTime) return;
+
+  const currentHour = is24HourFormat
+    ? currentClock.hours
+    : currentClock.hours % 12 || 12;
+  const currentPeriod = currentClock.hours >= 12 ? "PM" : "AM";
+
+  if (
+    currentHour === alarmTime.hours &&
+    currentClock.minutes === alarmTime.minutes &&
+    (is24HourFormat || currentPeriod === alarmTime.period)
+  ) {
+    alarmSound.play();
+    alert("Alarm ringing!");
+    alarmTime = null; // Reset alarm after it rings
+  }
+};
+
+
+const setAlarmEl = document.querySelector('.set-alarm')
+console.log(setAlarmEl)
+setAlarmEl.addEventListener('click', ()=>{
+  console.log(alarmEl.value)
+
+})
+
 
 
