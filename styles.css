@@ -90,8 +90,8 @@ option{
 }
 
 .hour, .minutes{
-    background-color: rgb(206, 202, 202);
-    padding: 8px;
+    background-color: rgb(231, 223, 223);
+    padding: 0 10px;
     border-radius: 10px;
     margin: 0 5px;
     color: rgb(19, 15, 15);
@@ -121,9 +121,3 @@ option{
     color: rgb(255, 189, 66);
 }
 
-.bottom-bar{
-    width: 200px;
-    height: 1px;
-    background-color: rgb(245, 245, 210);
-    border-radius: 8px;
-}
