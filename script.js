@@ -5,6 +5,7 @@ const clockseconds = document.querySelector('.seconds');
 const timeFormat = document.querySelector('.time-format');
 const changeFormat = document.getElementById('change-format')
 const alarmEl = document.getElementById('alarm')
+const alarmSound = document.getElementById('alarm-sound')
 let hour12 = false;
 
 
@@ -64,7 +65,8 @@ Object.defineProperties(Clock.prototype, {
     display: {
         value: function() {
           if(hour12){
-            clockhours.textContent = (this.hours - 12).toString().padStart(2, '0');
+            
+            clockhours.textContent = (this.hours > 12 ? this.hours - 12 : this.hours).toString().padStart(2, '0');
             clockminutes.textContent = this.minutes.toString().padStart(2, '0');
             clockseconds.textContent = this.seconds.toString().padStart(2, '0');
             timeFormat.textContent = this.get12HourTime();
@@ -179,5 +181,6 @@ setAlarmEl.addEventListener('click', ()=>{
 
 })
 
+console.log(alarmSound)
 
-
+alarmSound.play()
