@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Master</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <title>Javascript Clock</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="./script.js"></script>
 </head>
@@ -12,7 +15,10 @@
     <div class="container">
         <div class="digital-clock">
             <div class="timeFormat">
-                <button id="changeFormat">24-Hour Format</button>
+                <select name="select-format" id="change-format">
+                    <option value="0">24Hour time</option>
+                    <option value="1">12Hour time</option>
+                </select>
             </div>
             <div class="time montserrat">
                 <span class="hour"></span>
