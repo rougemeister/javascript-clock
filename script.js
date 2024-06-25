@@ -83,6 +83,7 @@ changeFormat.addEventListener('change', (e)=>{
   console.log(e)
     if(e.target.value === "24Hour" ){
       timeFormat.style.visibility = "hidden"
+      hour12 = false
     } else if(e.target.value === "12Hour"){
             hour12 = true
     }
