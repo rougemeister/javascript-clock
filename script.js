@@ -3,6 +3,7 @@ const clockhours = document.querySelector('.hour');
 const clockminutes = document.querySelector('.minutes');
 const clockseconds = document.querySelector('.seconds');
 const timeFormat = document.querySelector('.time-format');
+const changeFormat = document.getElementById('change-format')
 
 
 function Clock() {
@@ -66,7 +67,7 @@ Object.defineProperties(Clock.prototype, {
 })
 
 
-
+console.log(changeFormat)
 
 
 
@@ -92,3 +93,5 @@ const newClock = new Clock();
 updateTime((hours, minutes, seconds) => {
     newClock.update(hours, minutes, seconds);
 }); 
+
+
